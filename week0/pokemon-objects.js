@@ -15,7 +15,7 @@ var giratina = new pokemon("Giratina", "Dragon, Ghost", 150, 120, 100, true);
 var mawile = new pokemon("Mawile", "Steel, Fairy", 50, 85, 85, false);
 var gyrados = new pokemon("Gyrados", "Water, Flying", 95, 79, 125, false);
 
-var roster = [garchomp, scizor, genesect, giratina, mawile, gyrados]
+var roster = [garchomp, scizor, genesect, giratina, mawile, gyrados];
 
 function printRoster(){
 for (var i = 0; i < roster.length; i++){
@@ -30,12 +30,10 @@ function pokemonAttacked(){
 }
 /*(pokemonAttacked();*/
 
-var randompokemon = roster[Math.floor(Math.random() * 6)]
-
-var hpchoice = prompt("How much HP would you like to subtract?");
-
 function randomAttacked(){
+    var randompokemon = roster[Math.floor(Math.random() * roster.length)];
+    var hpchoice = prompt("How much HP would you like to subtract?");
     randompokemon.hp = randompokemon.hp - hpchoice;
-    console.log(roster[randompokemon]);
+    console.log(randompokemon);
 }
 randomAttacked();
