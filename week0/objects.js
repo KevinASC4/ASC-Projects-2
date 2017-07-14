@@ -31,6 +31,7 @@ function Pizza (sauce, cheese, toppings, size){
     this.size = size;
 }
 
-var famiglia = new Pizza("tomato", "mozzarella", 
-                        ["bolis", "garlic knots", "grease"], 
+var famiglia = new Pizza("tomato", "kraft singles", 
+                        ["pineapple", "garlic knots", "grease"], 
                         "massive");
+var luzzos = new Pizza ("tomato", "mozzarella", "pepperoni", "tini");
