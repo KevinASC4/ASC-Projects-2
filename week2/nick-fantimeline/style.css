@@ -1,0 +1,50 @@
+body{
+background: linear-gradient( #d32f2f 25%, #ffffff 105% );
+margin: 0 auto;
+width: 50%;
+text-align:center;
+}
+
+.main-img {
+    width: 35%;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid black;
+    outline-color: black;
+}
+.logo {
+    width: 20%;
+}
+
+.timeline{
+    border: 1px solid black;
+}
+
+h3{
+    text-align:center
+}
+
+h2{
+    padding: 1px solid black;
+    border: 1px solid black;
+}
+
+@media(max-width: 600px) {
+    body {
+        width: 100%;
+        
+    }
+    .main-img {
+        width: 40%;
+    }
+    .bio{
+        padding-left:3px;
+        padding-right:3px;
+    }
+}
+@media(min-width: 768px) {
+    body {
+        width:100%;
+        font-size: 120%;
+    }
+}
