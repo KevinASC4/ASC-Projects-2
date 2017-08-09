@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAi7zWCS1lW5IG1eWhHpLgi_Q31Px4jTi8",
+            authDomain: "highscore-e6ca7.firebaseapp.com",
+            databaseURL: "https://highscore-e6ca7.firebaseio.com",
+            projectId: "highscore-e6ca7",
+            storageBucket: "",
+            messagingSenderId: "858268961589"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <button id="logbutton">Log In</button><br>
+    <button id="rock" onclick="game(0)">Rock</button>
+    <button id="scissors" onclick="game(2)">Scissors</button>
+    <button id="paper" onclick="game(1)">Paper</button>
+    <button id ="submitbutton" onclick="submit()">Submit Score</button><br>
+    <div class="container" <input id="login" placeholder="Your Initials">
+        </input>
+        <div class="scoreboard">
+            <h2> Scoreboard </h2>
+            <h4 id="win"></h4>
+            <h4 id="lose"></h4>
+        </div>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+
+</body>
+
+</html>

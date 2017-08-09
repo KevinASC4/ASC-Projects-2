@@ -1,0 +1,61 @@
+body{
+    background: white;
+}
+
+#rock {
+    background-color: #4CAF50 ; /* Green */
+    border: none;
+    color: white;
+    padding: 25px 52px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+   
+}
+
+#paper{
+    background-color: #4CAF50 ; /* Green */
+    border: none;
+    color: white;
+    padding: 25px 52px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+   
+}
+
+#scissors{
+    background-color: #4CAF50 ; /* Green */
+    border: none;
+    color: white;
+    padding: 25px 52px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+   
+}
+
+#container{
+width: 50%;
+  margin: 0 auto;
+}
+
+#buttons{
+    display: table;
+    margin: 0 auto;
+}

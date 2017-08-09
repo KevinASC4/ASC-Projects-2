@@ -1,20 +1,64 @@
-var img;
-var img2;
-var img3;
-var img4;
+var img, img2, img3, img4;
+var darkraigif;
+var dragonitegif;
+var lucariogif;
+var garchompgif;
+var blazikengif;
+var venusaurgif;
+var garchomp;
+var dragonite;
+var blaziken;
+var darkrai;
+var lucario;
+var venusaur;
+var dragonitemovesdmg;
+var userParty;
+var enemyParty;
+var userPokemon;
+var enemyIndex;
+var userIndex;
+var enemyPokemon;
+var enemymovesdmg;
+var enemyMoves;
+var battleText;
 
-
-function setup(){
-    createCanvas(500, 500);
-    background("grey"); //CHANGE TO WHITE
+function preload() {
     img = loadImage("garchomp.png");
     img2 = loadImage("garchompback.png");
     img3 = loadImage("dragonite.png");
     img4 = loadImage("background.jpg");
+    darkraigif = loadGif("darkrai.gif");
+    dragonitegif = loadGif("dragonite.gif");
+    lucariogif = loadGif("lucario.gif");
+    garchompgif = loadGif("garchompback.gif");
+    blazikengif = loadGif("blazikenback.gif");
+    venusaurgif = loadGif("venusaurback.gif");
+}
+
+function setup() {
+    createCanvas(500, 500);
+
+    garchomp = new pokemon("Garchomp", 373, 373, "Dragon Claw", 50, "Earthquake", 30, "Stone Edge", 40, "Fire Blast", (20), garchompgif);
+    dragonite = new pokemon("Dragonite", 339, 339, "Thunder Punch", 20, "Fire Punch", (30), "Dragon Claw", (50), "Draco Meteor", (70), dragonitegif);
+    blaziken = new pokemon("Blaziken", 317, 317, "Sky Uppercut", 20, "Flamethrower", (30), "Blaze Kick", (50), "Flare Blitz", (70), blazikengif);
+    darkrai = new pokemon("Darkrai", 297, 297, "Dark Void", 20, "Dream Eater", (30), "Dark Pulse", (50), "Shadow Ball", (70), darkraigif);
+    lucario = new pokemon("Lucario", 302, 302, "Force Palm", 20, "Mach Punch", (30), "Bone Rush", (50), "Aura Sphere", (70), lucariogif);
+    venusaur = new pokemon("Venusaur", 367, 367, "Solarbeam", 20, "Sludge Bomb", (30), "Vine Whip", (50), "Frenzy Plant", (70), venusaurgif);
+
+    dragonitemovesdmg = [dragonite.move1dmg, dragonite.move2dmg, dragonite.move3dmg, dragonite.move4dmg];
+    userParty = [garchomp, blaziken, venusaur];
+    enemyParty = [dragonite, darkrai, lucario];
+    enemyIndex = Math.floor(Math.random() * enemyParty.length);
+    userIndex = Math.floor(Math.random() * userParty.length);
+    enemyPokemon = enemyParty[enemyIndex];
+    userPokemon = userParty[userIndex];
+    enemyMoves = [enemyPokemon.move1, enemyPokemon.move2, enemyPokemon.move3, enemyPokemon.move4];
+    enemymovesdmg = [enemyPokemon.move1dmg, enemyPokemon.move2dmg, enemyPokemon.move3dmg, enemyPokemon.move4dmg];
+    battleText = "What move would you like to use?";
 
 }
 
-function pokemon(name, HP, maxHP, move1, move1dmg, move2, move2dmg, move3, move3dmg, move4, move4dmg){
+function pokemon(name, HP, maxHP, move1, move1dmg, move2, move2dmg, move3, move3dmg, move4, move4dmg, figure) {
     this.name = name;
     this.HP = HP;
     this.maxHP = maxHP;
@@ -26,25 +70,18 @@ function pokemon(name, HP, maxHP, move1, move1dmg, move2, move2dmg, move3, move3
     this.move3dmg = move3dmg;
     this.move4 = move4;
     this.move4dmg = move4dmg;
+    this.figure = figure;
 }
 
 
-var garchomp = new pokemon("Garchomp", 400, 400, "Dragon Claw", 50, "Earthquake", 30, "Stone Edge", 40, "Fire Blast", 20);
-var dragonite = new pokemon("Dragonite", 400 , 400, "Thunder Punch", 20, "Fire Punch", (30), "Dragon Claw", (50), "Draco Meteor", (70));
-var dragonitemovesdmg = [dragonite.move1dmg, dragonite.move2dmg, dragonite.move3dmg, dragonite.move4dmg];
-var dragonitemoves = [dragonite.move1, dragonite.move2, dragonite.move3, dragonite.move4];
 
-
-function draw(){
-    background("grey");
+function draw() {
+    background(img4, 100);
     stroke("black");
-    fill("grey");//SHADOWS
-    ellipse(100, 430, 100, 20);
-    ellipse(400, 130, 100, 20);
     fill("black");
     stroke("white");//UI RECTANGLES
     rect(0, 450, 500, 80);
-    rect(310,300,200,200);
+    rect(310, 300, 200, 200);
     fill("white");//MOVES UNDERLINE AND BOXES
     rect(310, 330, 190, 2);
     rect(328, 350, 150, 20, 20);
@@ -53,57 +90,123 @@ function draw(){
     rect(328, 455, 150, 20, 20);
     noStroke();
     textSize(20);//ALLY TEXT
-    text("What move would you like to use?",5 , 480);
+    text(battleText, 5, 480);
     textSize(24);
-    text("Moves",370, 322);
+    text("Moves", 370, 322);
     fill("black");
-    text(garchomp.name,125, 330);
-    text(garchomp.HP + "/" + garchomp.maxHP, 135, 370);
+    text(userPokemon.name, 150, 330);
+    fill("white");
+    rect(153, 340, 100, 15);
+    fill("green");
+    rect(153, 340, userPokemon.HP/userPokemon.maxHP * 100, 15);
     textSize(16);
-    text(garchomp.move1, 350, 365);
-    text(garchomp.move2, 350, 400);
-    text(garchomp.move3, 350, 435);
-    text(garchomp.move4, 350, 470);
+    fill("black");
+    text(userPokemon.move1, 350, 365);
+    text(userPokemon.move2, 350, 400);
+    text(userPokemon.move3, 350, 435);
+    text(userPokemon.move4, 350, 470);
     textSize(24);
-    text(dragonite.name, 250, 50); 
-    text(dragonite.HP + "/" + dragonite.maxHP, 250, 90)
-    image(img2, 55, 350);
-    image(img3, 355, 50);
-    if (dragonite.HP <=0){
-        dragonite.HP = 0;
-        fill("black");
-        rect( 0, 0, 600, 600);
-        textSize(64);
-        fill("white");
-        text("Dragonite fainted", 0, 125);
-        text("You win!", 125, 250);
+    text(enemyPokemon.name, 250, 50);
+    fill("white");
+    rect(250, 60, 100, 15);
+    fill("green");
+    rect(250, 60, enemyPokemon.HP/enemyPokemon.maxHP * 100, 15);
+    image(userPokemon.figure, 45, 335);
+    image(enemyPokemon.figure, 355, 65);
+    if (enemyPokemon.HP <= 0) {
+        enemyPokemon.HP = 0;
+        enemyParty.splice(enemyIndex, 1);
+        if (enemyParty.length > 0) {
+            enemyIndex = Math.floor(Math.random() * enemyParty.length);
+            enemyPokemon = enemyParty[enemyIndex];
+            enemyPokemon.HP = enemyPokemon.maxHP;
+            enemyMoves = [enemyPokemon.move1, enemyPokemon.move2, enemyPokemon.move3, enemyPokemon.move4];
+        } else {
+            fill("black");
+            rect(0, 0, 600, 600);
+            textSize(64);
+            fill("white");
+            text("The enemy team", 0, 125);
+            text("was defeated!", 15, 200)
+            text("You win!", 125, 375);
+        }
     }
-    if (garchomp.HP <=0){
-        garchomp.HP = 0;
-        fill("black");
-        rect( 0, 0, 600, 600);
-        textSize(40);
-        fill("white");
-        text("Your Garchomp fainted!", 50 , 125);
-        text("You blacked out!", 100, 375);
+    if (userPokemon.HP <= 0) {
+        userPokemon.HP = 0;
+        userParty.splice(userIndex, 1);
+        if (userParty.length > 0) {
+            userIndex = Math.floor(Math.random() * userParty.length);
+            userPokemon = userParty[userIndex];
+            userPokemon.HP = userPokemon.maxHP;
+        } else {
+            fill("black");
+            rect(0, 0, 600, 600);
+            textSize(40);
+            fill("white");
+            text("Your whole team fainted!", 50, 125);
+            text("You blacked out!", 100, 375);
+        }
     }
-   
 }
 
-function mouseClicked(){
-    if(mouseX >= 328 && mouseX <= 478 && mouseY >= 350 && mouseY <= 370){
-        dragonite.HP = dragonite.HP - garchomp.move1dmg;
-    } 
-    else if(mouseX >= 328 && mouseX <= 478 && mouseY >= 385 && mouseY <= 405){
-        dragonite.HP = dragonite.HP - garchomp.move2dmg;   
+function mouseClicked() {
+    if (mouseX >= 328 && mouseX <= 478 && mouseY >= 350 && mouseY <= 370) {
+        setTimeout(function () {
+            battleText = userPokemon.name + " used " + userPokemon.move1 + "!";
+        }, 250)
+        setTimeout(function () {
+            enemyPokemon.HP = enemyPokemon.HP - userPokemon.move1dmg;
+        }, 750);
+        setTimeout(function () {
+            battleText = "Enemy " + enemyPokemon.name + " used " + random(enemyMoves) + "!";
+        }, 1250)
+        setTimeout(function () {
+            battleText = "What move would you like to use?"
+        }, 2250)
     }
-    else if(mouseX >= 328 && mouseX <= 478 && mouseY >= 420 && mouseY <= 440){
-        dragonite.HP = dragonite.HP - garchomp.move3dmg;
+    else if (mouseX >= 328 && mouseX <= 478 && mouseY >= 385 && mouseY <= 405) {
+        setTimeout(function () {
+            battleText = userPokemon.name + " used " + userPokemon.move2 + "!";
+        }, 250)
+        setTimeout(function () {
+            enemyPokemon.HP = enemyPokemon.HP - userPokemon.move2dmg;
+        }, 750);
+        setTimeout(function () {
+            battleText = "Enemy " + enemyPokemon.name + " used " + random(enemyMoves) + "!";
+        }, 1250)
+        setTimeout(function () {
+            battleText = "What move would you like to use?"
+        }, 2250)
     }
-    else if(mouseX >= 328 && mouseX <= 478 && mouseY >= 455 && mouseY <= 475){
-        dragonite.HP = dragonite.HP - garchomp.move4dmg;
+    else if (mouseX >= 328 && mouseX <= 478 && mouseY >= 420 && mouseY <= 440) {
+        setTimeout(function () {
+            battleText = userPokemon.name + " used " + userPokemon.move3 + "!";
+        }, 250)
+        setTimeout(function () {
+            enemyPokemon.HP = enemyPokemon.HP - userPokemon.move3dmg;
+        }, 750);
+        setTimeout(function () {
+            battleText = "Enemy " + enemyPokemon.name + " used " + random(enemyMoves) + "!";
+        }, 1250)
+        setTimeout(function () {
+            battleText = "What move would you like to use?"
+        }, 2250)
     }
-    setTimeout(function(){
-        garchomp.HP = garchomp.HP - random(dragonitemovesdmg);
-    }, 500);
+    else if (mouseX >= 328 && mouseX <= 478 && mouseY >= 455 && mouseY <= 475) {
+        setTimeout(function () {
+            battleText = userPokemon.name + " used " + userPokemon.move4 + "!";
+        }, 250)
+        setTimeout(function () {
+            enemyPokemon.HP = enemyPokemon.HP - userPokemon.move4dmg;
+        }, 750);
+        setTimeout(function () {
+            battleText = "Enemy " + enemyPokemon.name + " used " + random(enemyMoves) + "!";
+        }, 1250)
+        setTimeout(function () {
+            battleText = "What move would you like to use?"
+        }, 2250)
+    }
+    setTimeout(function () {
+        userPokemon.HP = userPokemon.HP - random(enemymovesdmg);
+    }, 1750);
 }
