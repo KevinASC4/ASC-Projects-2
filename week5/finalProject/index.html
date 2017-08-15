@@ -2,20 +2,49 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Hustle</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
 
-
-
+    <script src="script.js"></script>
 </head>
+
 
 <body>
 
+    <div class="intro-message">
+        <h1>The Hustle</h1>
+        <h3>The Path to the Hustle is a Click Away</h3>
+        <hr class="intro-divider">
+    </div>
     <div class="fb-login-button" scope="public_profile,email,user_friends" onlogin="checkLoginState();" width="300" data-max-rows="1"
         data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"></div>
     <div id="status">
@@ -25,8 +54,10 @@
         <img id="Pic" src=""></img>
     </div>
 
- <script src="script.js"></script>
-</body>
 
+
+
+
+</body>
 
 </html>

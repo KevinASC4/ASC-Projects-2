@@ -1,18 +1,33 @@
-var uid, accessToken, userName, profilePic;
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDmZKXS791ZIQstGRd7WA7HHl3jiYqktCg",
+    authDomain: "hustle-firechat.firebaseapp.com",
+    databaseURL: "https://hustle-firechat.firebaseio.com",
+    projectId: "hustle-firechat",
+    storageBucket: "",
+    messagingSenderId: "382227483186"
+};
+firebase.initializeApp(config);
+
+var usid, accessToken, userName, profilePic;
+var login = false;
+var provider = new firebase.auth.FacebookAuthProvider();
 
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
-        uid = response.authResponse.userID;
+        usid = response.authResponse.userID;
         accessToken = response.authResponse.accessToken;
-        console.log(uid);
-        testAPI();
+        console.log(usid);
+        if (login == true) {
+            testAPI();
+        }
     } else {
         // The person is not logged into your app or we are unable to tell.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -26,6 +41,7 @@ function statusChangeCallback(response) {
 
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
+        login = !login;
         statusChangeCallback(response);
     });
 }
@@ -54,20 +70,20 @@ function testAPI() {
         userName = response.name;
         console.log('Successful login for: ' + response.name);
         console.log(response);
-        
+
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
     });
     FB.api(
-    "/" + uid + "/picture", function (response) {
-      if (response && !response.error) {
-        console.log(response.data.url);
-        profilePic = response.data.url;
+        "/" + usid + "/picture", function (response) {
+            if (response && !response.error) {
+                console.log(response.data.url);
+                profilePic = response.data.url;
 
-      }
-    }
-);
-    FB.api("/" + uid + "/friends", function (response) {
+            }
+        }
+    );
+    FB.api("/" + usid + "/friends", function (response) {
         if (response && !response.error) {
             console.log(response);
         } else {
@@ -80,8 +96,34 @@ function testAPI() {
             })
         } else {
             $("#Name").text(userName);
-            $("#profileInfo").append("<img src="+profilePic+">");
+            $("#profileInfo").append("<img src=" + profilePic + ">");
         }
     }
     );
 }
+function homePage() {
+    window.location.assign("page1.html");
+}
+firebase.auth().getRedirectResult().then(function (result) {
+    if (result.credential) {
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        var token = accessToken;
+        // ...
+    }
+    // The signed-in user info.
+    var user = result.user;
+}).catch(function (error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+});
+// var firebaseRef = firebase.database().ref("firechat");
+// var chat = new Firechat(firebaseRef);
+// chat.setUser(userId, userName, function(user) {
+//   chat.resumeSession();
+// });
