@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Nick is a coolass</h1>
+    <div id="app">
+        {{message}} <br> {{ message2 }} <br>
+
+        <span v-bind:title="message3">
+    Hover your mouse over me for a few seconds
+    to see my dynamically bound title!
+  </span>
+        <button v-on:click="showDiv()">Click me</button>
+        <div v-if="seen">
+            Cisco Gang:
+            {{students.length}}
+        </div>
+        <div v-for = "student in students">
+            <ul>
+                <li> {{student}}</li>
+            </ul>
+        </div>
+        <div v-for = "student in students">
+            <cisco-student v-for = "student in students" v-bind:student="student" v-bind:key: 
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
