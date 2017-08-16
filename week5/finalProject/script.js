@@ -1,17 +1,9 @@
 
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDmZKXS791ZIQstGRd7WA7HHl3jiYqktCg",
-    authDomain: "hustle-firechat.firebaseapp.com",
-    databaseURL: "https://hustle-firechat.firebaseio.com",
-    projectId: "hustle-firechat",
-    storageBucket: "",
-    messagingSenderId: "382227483186"
-};
-firebase.initializeApp(config);
+
 
 var usid, accessToken, userName, profilePic;
-var login = false;
+var loginbool = false;
 var provider = new firebase.auth.FacebookAuthProvider();
 
 // This is called with the results from from FB.getLoginStatus().
@@ -20,13 +12,16 @@ function statusChangeCallback(response) {
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
+
+
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         usid = response.authResponse.userID;
         accessToken = response.authResponse.accessToken;
         console.log(usid);
-        if (login == true) {
+        if (loginbool == true) {
             testAPI();
+            // login('facebook');
         }
     } else {
         // The person is not logged into your app or we are unable to tell.
@@ -41,7 +36,8 @@ function statusChangeCallback(response) {
 
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
-        login = !login;
+        console.log(response);
+        loginbool = !loginbool;
         statusChangeCallback(response);
     });
 }
@@ -104,26 +100,44 @@ function testAPI() {
 function homePage() {
     window.location.assign("page1.html");
 }
-firebase.auth().getRedirectResult().then(function (result) {
-    if (result.credential) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = accessToken;
-        // ...
-    }
-    // The signed-in user info.
-    var user = result.user;
-}).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-});
-// var firebaseRef = firebase.database().ref("firechat");
-// var chat = new Firechat(firebaseRef);
-// chat.setUser(userId, userName, function(user) {
-//   chat.resumeSession();
+// firebase.auth().getRedirectResult().then(function (result) {
+//     if (result.credential) {
+//         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+//         var token = accessToken;
+//         // ...
+//     }
+//     // The signed-in user info.
+//     var user = result.user;
+// }).catch(function (error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     // ...
 // });
+// // var firebaseRef = firebase.database().ref("firechat");
+// // var chat = new Firechat(firebaseRef);
+// // chat.setUser(userId, userName, function(user) {
+// //   chat.resumeSession();
+// // });
+ function login() {
+            // Log the user in via Twitter
+            var provider = new firebase.auth.FacebookAuthProvider();
+            //keep in mind you can add optionality
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                var token = accessToken;
+            }).catch(function (error) {
+                console.log("Error authenticating user:", error);
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ..
+            });
+        }

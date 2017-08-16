@@ -32,9 +32,60 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyDmZKXS791ZIQstGRd7WA7HHl3jiYqktCg",
+            authDomain: "hustle-firechat.firebaseapp.com",
+            databaseURL: "https://hustle-firechat.firebaseio.com",
+            projectId: "hustle-firechat",
+            storageBucket: "",
+            messagingSenderId: "382227483186"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
 
-    <script src="script.js"></script>
+    <script>
+        function login() {
+            // Log the user in via Twitter
+            var provider = new firebase.auth.FacebookAuthProvider();
+            //keep in mind you can add optionality
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                var token = accessToken;
+            }).catch(function (error) {
+                console.log("Error authenticating user:", error);
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ..
+            });
+        }
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            // Once authenticated, instantiate Firechat with the logged in user
+            if (user) {
+                initChat(user);
+            }
+        });
+
+        function initChat(user) {
+            // Get a Firebase Database ref
+            var chatRef = firebase.database().ref("chat");
+
+            // Create a Firechat instance
+            var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+
+            // Set the Firechat user
+            chat.setUser(user.uid, user.displayName);
+        }
+    </script>
+
 </head>
 
 
@@ -45,19 +96,28 @@
         <h3>The Path to the Hustle is a Click Away</h3>
         <hr class="intro-divider">
     </div>
-    <div class="fb-login-button" scope="public_profile,email,user_friends" onlogin="checkLoginState();" width="300" data-max-rows="1"
-        data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"></div>
+
+
+     <!--<div id="firechat-wrapper">
+        <button onclick="checkLoginState();">Log in with Facebook</button>
+    </div>-->
+
+    <div class="fb-login-button" scope="public_profile,email,user_friends" onlogin="checkLoginState();"
+        width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true"
+        data-use-continue-as="false">
+    </div>
     <div id="status">
     </div>
     <div id="profileInfo">
         <h1 id="Name"></h1>
         <img id="Pic" src=""></img>
     </div>
+   
 
 
 
 
-
+    <script src="script.js"></script>
 </body>
 
 </html>
