@@ -1,0 +1,88 @@
+.nav-wrapper .input-field input[type=search] {
+    height: inherit;
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.input-field input[type=search] {
+    display: block;
+    line-height: inherit;
+}
+
+h1{
+    color: white;
+}
+
+p{
+    color: white;
+}
+.nav-wrapper{
+    background-color: #000;
+    position: fixed;
+    text-align: center;
+}
+
+.brand-logo {
+    color: #89e084 !important;
+    margin-left: -50px !important;
+}
+h2{
+    color: white;
+}
+
+li{
+    color: white;
+ 
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 0px;
+    }
+}
+
+.bg-image-full {
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    border: 3px solid black;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: yellow;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating{
+     height: 100px;
+    width: 500px;
+}
+
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    position: absolute;
+    right: 620px;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 20%;
+}

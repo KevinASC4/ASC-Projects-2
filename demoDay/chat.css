@@ -1,0 +1,46 @@
+#merchInfo{
+    width:450px;
+    border-right: solid;
+    padding-top: 10px; 
+    padding-left: 10px;
+    height: 1000px;    
+}
+#merch{
+    width:375px;
+    height:375px;
+}
+div#OtherPersonsinfo{
+   width: 450px;
+   height: 1000px;
+   padding-left: 30px;
+   padding-top: 10px;
+   border-right: solid;
+}
+.pictures{
+    width:100px;
+    height:100px;
+}
+
+.message-pic{
+    margin-right: 15px;
+    float: left;
+}
+
+div.msg{
+    border-bottom: solid;
+    border-color: white;
+    width: 400px;
+    height: 125px;
+    margin-bottom: 5px;
+}
+.nav-wrapper{
+background: #263238;
+}
+body {
+    color:white;
+
+    background: #37474f;
+}
+#meetup{
+    color:black
+}
